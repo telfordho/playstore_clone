@@ -1,28 +1,21 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import SearchBar from './components/SearchBar'
+import Recommendation from './components/Recommendation'
+import Grid from '@material-ui/core/Grid';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React blah
-          </a>
-        </header>
-      </div>
-    );
-  }
+const App = (props) => {
+  const { classes } = props;
+
+  return (
+    <Grid container>
+      <Grid item xs={12} sm={12} style={{display:'flex'}} justify='center'>
+        <SearchBar classes={classes}/>
+      </Grid>
+      <Grid item xs={12} sm={12} style={{display:'flex'}} justify='center'>
+        <Recommendation classes={classes}/>
+      </Grid>
+    </Grid>
+  );
 }
 
 export default App;
