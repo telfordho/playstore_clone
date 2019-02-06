@@ -1,4 +1,6 @@
 import React from 'react';
+import { actRecommendationFetch } from '../actions/recommendation'
+import {connect} from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -9,19 +11,6 @@ const styles = theme => ({
         display:'flex',
         backgroundColor: theme.palette.background.paper,
         width:'100%'
-      
-    },
-    gridList: {
-      flexWrap: 'nowrap',
-      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-      transform: 'translateZ(0)',
-    },
-    title: {
-      color: theme.palette.primary.light,
-    },
-    titleBar: {
-      background:
-        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
     },
   });
 
@@ -77,18 +66,34 @@ const tileData = [
     },
 ];
 
-function Recommendation(props) {
-    const { classes } = props;
-    return (
-      <div className={classes.root}>
-          {tileData.map(tile => (
-            <div key={tile.img}>
-              <img src={tile.img} alt={tile.title} />
-              <p>this is some text for testing use</p>
-            </div>
-          ))}
-      </div>
-    );
+class Recommendation extends React.Component {
+    componentDidMount(){
+        this.props.onInit()
+      }
+    render(){
+        const { classes } = this.props;
+        return (
+          <div className={classes.root}>
+              {tileData.map(tile => (
+                <div key={tile.img}>
+                  <img src={tile.img} alt={tile.title} />
+                  <p>this is some text for testing use</p>
+                </div>
+              ))}
+          </div>
+        );
+    }
   }
 
-export default withStyles(styles)(Recommendation);
+const mapDispatchToProps = dispatch => ({
+  onInit: () => {
+      dispatch(actRecommendationFetch());
+  },
+})
+
+const RecommendationContainer = connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(Recommendation));
+
+export default RecommendationContainer;

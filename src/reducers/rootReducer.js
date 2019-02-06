@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
-import noteReducer from './noteReducer';
+import list from './list'
+import recommendation from './recommendation'
+
 export default combineReducers({
- noteReducer
+ list,
+ recommendation
 });
