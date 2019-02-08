@@ -34,21 +34,21 @@ class App extends React.Component {
     const { classes } = this.props;
     
     return (
-      <Grid container>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
+      <div>
+        <Grid style={{ display: 'flex' }} container justify='center'>
           <SearchBar classes={classes} />
         </Grid>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
+        <Grid style={{ display: 'flex' }} container justify='center'>
           <Suspense fallback={<div><CircularProgress/></div>}>
             <LazyRecommendation classes={classes} />
           </Suspense>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
+        <Grid style={{ display: 'flex' }} container justify='center'>
           <Suspense fallback={<div><CircularProgress/></div>}>
             <LazyAppList classes={classes} page={this.state.page}/>
           </Suspense>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
+        <Grid style={{ display: 'flex' }} container justify='center'>
           <Pagnination
             classes={classes}
             handleNextButtonClick={this.handleNextButtonClick}
@@ -57,7 +57,7 @@ class App extends React.Component {
             page={this.state.page}
           />
         </Grid>
-      </Grid>
+      </div>
     );
   }
 }
