@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import SearchBar from './components/SearchBar'
-import Recommendation from './components/Recommendation'
-import AppList from './components/AppList'
 import Pagnination from './components/Pagnination'
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+const LazyRecommendation = React.lazy(()=>import('./components/Recommendation'))
+const LazyAppList = React.lazy(()=>import('./components/AppList'))
 
 class App extends React.Component {
   constructor(props) {
@@ -31,17 +32,22 @@ class App extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    
     return (
       <Grid container>
         <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
           <SearchBar classes={classes} />
         </Grid>
         <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
-          <Recommendation classes={classes} />
+          <Suspense fallback={<div><CircularProgress/></div>}>
+          <LazyRecommendation classes={classes} />
+          </Suspense>
         </Grid>
         <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
-          <AppList classes={classes} page={this.state.page}/>
+        <Suspense fallback={<div><CircularProgress/></div>}>
+
+          <LazyAppList classes={classes} page={this.state.page}/>
+          </Suspense>
         </Grid>
         <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
           <Pagnination
