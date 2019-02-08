@@ -40,13 +40,12 @@ class App extends React.Component {
         </Grid>
         <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
           <Suspense fallback={<div><CircularProgress/></div>}>
-          <LazyRecommendation classes={classes} />
+            <LazyRecommendation classes={classes} />
           </Suspense>
         </Grid>
         <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
-        <Suspense fallback={<div><CircularProgress/></div>}>
-
-          <LazyAppList classes={classes} page={this.state.page}/>
+          <Suspense fallback={<div><CircularProgress/></div>}>
+            <LazyAppList classes={classes} page={this.state.page}/>
           </Suspense>
         </Grid>
         <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>

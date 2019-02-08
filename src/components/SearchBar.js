@@ -6,8 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import searchBarStyles from '../jss/searchBarStyles'
 import { actRecommendationSearch,actAppListSearch } from '../actions/search'
-import {connect} from "react-redux";
-
+import { connect } from "react-redux";
 
 const SearchBar = props => {
   const { classes, onSearch } = props;
@@ -16,9 +15,8 @@ const SearchBar = props => {
     <Paper className={classes.root} elevation={5}>
       <InputBase className={classes.input} placeholder="Search" onChange={e=>{
           onSearch(e.target.value)
-      }
-      }
-          />
+        }}
+      />
       <IconButton className={classes.iconButton} aria-label="SearchIcon">
         <SearchIcon />
       </IconButton>
