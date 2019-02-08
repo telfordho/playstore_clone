@@ -34,16 +34,16 @@ class App extends React.Component {
 
     return (
       <Grid container>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} justify='center'>
+        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
           <SearchBar classes={classes} />
         </Grid>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} justify='center'>
+        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
           <Recommendation classes={classes} />
         </Grid>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} justify='center'>
+        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
           <AppList classes={classes} page={this.state.page}/>
         </Grid>
-        <Grid item xs={12} sm={12} style={{ display: 'flex' }} justify='center'>
+        <Grid item xs={12} sm={12} style={{ display: 'flex' }} container justify='center'>
           <Pagnination
             classes={classes}
             handleNextButtonClick={this.handleNextButtonClick}

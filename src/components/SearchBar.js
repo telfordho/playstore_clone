@@ -5,13 +5,20 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import searchBarStyles from '../jss/searchBarStyles'
+import { actRecommendationSearch,actAppListSearch } from '../actions/search'
+import {connect} from "react-redux";
 
-const SearchBar = (props) => {
-  const { classes } = props;
+
+const SearchBar = props => {
+  const { classes, onSearch } = props;
 
   return (
     <Paper className={classes.root} elevation={5}>
-      <InputBase className={classes.input} placeholder="Search"/>
+      <InputBase className={classes.input} placeholder="Search" onChange={e=>{
+          onSearch(e.target.value)
+      }
+      }
+          />
       <IconButton className={classes.iconButton} aria-label="SearchIcon">
         <SearchIcon />
       </IconButton>
@@ -19,4 +26,16 @@ const SearchBar = (props) => {
   );
 }
 
-export default withStyles(searchBarStyles)(SearchBar);
+const mapDispatchToProps = dispatch => ({
+  onSearch: (input) => {
+      dispatch(actRecommendationSearch(input));
+      dispatch(actAppListSearch(input));
+  },
+})
+
+const SearchBarContainer = connect(
+  null,
+  mapDispatchToProps
+)(withStyles(searchBarStyles)(SearchBar));
+
+export default SearchBarContainer;

@@ -1,9 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import searchBarStyles from '../jss/searchBarStyles'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -16,7 +13,7 @@ const Pagnination = props => {
         handlePageClick,
         page
        } = props;
-       console.log(page)
+
   return (
     <div>
         <IconButton
@@ -28,7 +25,7 @@ const Pagnination = props => {
         </IconButton>
         {
             [...Array(10)].map((number,idx)=>(
-                <IconButton onClick={()=>handlePageClick(idx + 1)}>
+                <IconButton key={idx.toString()} onClick={()=>handlePageClick(idx + 1)}>
                     {idx + 1}
                 </IconButton>
             ))

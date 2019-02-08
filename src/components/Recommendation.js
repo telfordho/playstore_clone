@@ -25,14 +25,14 @@ const styles = theme => ({
   });
 
 class Recommendation extends React.Component {
-    componentDidMount(){
+    componentDidMount = () => {
         this.props.onInit()
       }
     render(){
         const { recommendation, classes } = this.props;
         return (
           <div className={classes.root}>
-              {recommendation.data.map(item => (
+              {recommendation.search.map(item => (
                 <div className={classes.recommendItem} key={item['im:image'][1].label}>
                   <img src = {item['im:image'][1].label} alt='icon' className={classes.iconImage}/>
                   <div>

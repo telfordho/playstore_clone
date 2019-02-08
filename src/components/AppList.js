@@ -25,19 +25,20 @@ const styles = {
 
 class AppList extends React.Component {
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.onInit()
   }
 
-  handleDataPerPageRender() {
+  handleDataPerPageRender = () => {
     const { list, page } = this.props;
+    console.log(list.search)
     if (page === 1)
-      return list.data.slice(0, 10)
+      return list.search.slice(0, 10)
     else
-      return list.data.slice((page * 10) - 10, page * 10)
+      return list.search.slice((page * 10) - 10, page * 10)
   }
 
-  handleAppNumberRender(idx) {
+  handleAppNumberRender = (idx) => {
     const { page } = this.props;
     if (page === 1)
       return idx + 1
@@ -52,13 +53,13 @@ class AppList extends React.Component {
       <div>
         <List dense={false}>
           {this.handleDataPerPageRender().map((item, idx) => (
-            <ListItem>
+            <ListItem key={this.handleAppNumberRender(idx).toString()}>
               <Typography component="h2" variant="display2" className={classes.appNo}>{this.handleAppNumberRender(idx)}</Typography>
               <ListItemIcon>
                 <img src={item['im:image'][1].label} alt='icon' className={(idx + 1) % 2 ? classes.iconImageCorner : classes.iconImageCircle} />
               </ListItemIcon>
               <Grid className={classes.infoWidth}>
-                <Typography variant="subheading">{item['im:name'].label}</Typography>
+                <Typography variant="subtitle1">{item['im:name'].label}</Typography>
                 <Typography variant="caption">{item.category.attributes.label}</Typography>
               </Grid>
             </ListItem>
