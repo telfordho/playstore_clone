@@ -6,22 +6,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import appListStyles from '../jss/appListStyles'
 import { connect } from "react-redux";
-
-const styles = {
-  appNo: {
-    width: '80px !important'
-  },
-  iconImageCorner: {
-    borderRadius: '20%'
-  },
-  iconImageCircle: {
-    borderRadius: '50%'
-  },
-  infoWidth: {
-    width: '300px'
-  }
-};
 
 class AppList extends React.Component {
 
@@ -31,7 +17,6 @@ class AppList extends React.Component {
 
   handleDataPerPageRender = () => {
     const { list, page } = this.props;
-    console.log(list.search)
     if (page === 1)
       return list.search.slice(0, 10)
     else
@@ -85,6 +70,6 @@ const mapDispatchToProps = dispatch => ({
 const AppListContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(AppList));
+)(withStyles(appListStyles)(AppList));
 
 export default AppListContainer;

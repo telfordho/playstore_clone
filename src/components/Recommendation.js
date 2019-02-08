@@ -1,28 +1,10 @@
 import React from 'react';
 import { actRecommendationFetch } from '../actions/recommendation'
+import recommendationStyles from '../jss/recommendationStyles'
 import Typography from '@material-ui/core/Typography';
 import {connect} from "react-redux";
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
-    root: {
-        marginTop: '30px',
-        overflow: 'auto',
-        display:'flex',
-        backgroundColor: theme.palette.background.paper,
-        width:'600px'
-    },
-    recommendItem: {
-        marginRight: '50px'
-    },
-    itemCaption: {
-        width: '75px',
-        marginBottom: '10px'
-    },
-    iconImage: {
-        borderRadius: '20%'
-    }
-  });
 
 class Recommendation extends React.Component {
     componentDidMount = () => {
@@ -61,6 +43,6 @@ const mapDispatchToProps = dispatch => ({
 const RecommendationContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(Recommendation));
+)(withStyles(recommendationStyles)(Recommendation));
 
 export default RecommendationContainer;
