@@ -79,7 +79,6 @@ const actAppListRatingFetch = id => {
     })
         .then(res => res.data.results[0].averageUserRating)
         .catch(err => {
-            console.log(err)
             throw new err()
         })
 };

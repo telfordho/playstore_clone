@@ -18,16 +18,16 @@ export const dataFilter = (data, input) => {
     let arr = []
     if(input !== null){
         data.forEach(item => {
-            if(item['im:name'].label.includes(input)){
+            if(item['im:name'].label.toLowerCase().includes(input)){
                 arr.push(item)
             }
-            else if(item.category.attributes.label.includes(input)){
+            else if(item.category.attributes.label.toLowerCase().includes(input)){
                 arr.push(item)
             }
-            else if(item['im:artist'].label.includes(input)){
+            else if(item['im:artist'].label.toLowerCase().includes(input)){
                 arr.push(item)
             }
-            else if(item.summary.label.includes(input)){
+            else if(item.summary.label.toLowerCase().includes(input)){
                 arr.push(item)
             }
         })  
