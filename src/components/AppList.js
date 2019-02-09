@@ -33,7 +33,7 @@ class AppList extends React.Component {
   }
 
   render() {
-    const { classes, list } = this.props;
+    const { classes } = this.props;
 
     return (
       <div>
