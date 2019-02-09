@@ -9,7 +9,10 @@ const LazyAppList = React.lazy(()=>import('./components/AppList'))
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { page: 1 };
+    this.state = { 
+      page: 1,
+      completed: 0,
+    };
   }
 
   handleNextButtonClick = () => {
@@ -39,12 +42,12 @@ class App extends React.Component {
           <SearchBar classes={classes} />
         </Grid>
         <Grid style={{ display: 'flex' }} container justify='center'>
-          <Suspense fallback={<div><CircularProgress/></div>}>
+          <Suspense fallback={<div><CircularProgress variant="indeterminate" disableShrink/></div>}>
             <LazyRecommendation classes={classes} />
           </Suspense>
         </Grid>
         <Grid style={{ display: 'flex' }} container justify='center'>
-          <Suspense fallback={<div><CircularProgress/></div>}>
+          <Suspense fallback={<div><CircularProgress variant="indeterminate"disableShrink/></div>}>
             <LazyAppList classes={classes} page={this.state.page}/>
           </Suspense>
         </Grid>
