@@ -1,7 +1,8 @@
 import {
     ACT_RECOMMENDATION_FETCH_BEGIN,
     ACT_RECOMMENDATION_FETCH_SUCCESS,
-    ACT_RECOMMENDATION_FETCH_FAIL
+    ACT_RECOMMENDATION_RATING_FETCH_SUCCESS,
+    ACT_RECOMMENDATION_FETCH_FAIL,
 } from "../actions/recommendation";
 
 import { ACT_RECOMMENDATION_SEARCH, dataFilter } from "../actions/search"
@@ -22,7 +23,14 @@ export default (state = initialState, action) => {
             return {
                 data: action.data.data.feed.entry,
                 search: action.data.data.feed.entry,
-                status: "viewing",
+                status: "fetched",
+            };
+
+        case ACT_RECOMMENDATION_RATING_FETCH_SUCCESS:
+            return {
+                data: action.data,
+                search: action.data,
+                status: "success",
             };
 
         case ACT_RECOMMENDATION_FETCH_FAIL:
@@ -31,8 +39,8 @@ export default (state = initialState, action) => {
         case ACT_RECOMMENDATION_SEARCH:
             return {
                 data: state.data,
-                search: dataFilter(state.data, state.search, action.input),
-                status: "viewing",
+                search: dataFilter(state.data, action.input),
+                status: "searching",
             }
 
         default:

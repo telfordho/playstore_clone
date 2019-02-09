@@ -14,7 +14,7 @@ export const actAppListSearch = input => {
     };
 }
 
-export const dataFilter = (data, dataSearch, input) => {
+export const dataFilter = (data, input) => {
     let arr = []
     if(input !== null){
         data.forEach(item => {

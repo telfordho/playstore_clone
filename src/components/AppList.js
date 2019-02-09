@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import StarRatings from 'react-star-ratings';
 import appListStyles from '../jss/appListStyles'
 import { connect } from "react-redux";
 
@@ -32,7 +33,7 @@ class AppList extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, list } = this.props;
 
     return (
       <div>
@@ -46,6 +47,7 @@ class AppList extends React.Component {
               <Grid className={classes.infoWidth}>
                 <Typography variant="subtitle1">{item['im:name'].label}</Typography>
                 <Typography variant="caption">{item.category.attributes.label}</Typography>
+                <StarRatings starRatedColor='orange' numberOfStars={5} rating={item.rating} starDimension="20px" starSpacing="5px"/>
               </Grid>
             </ListItem>
           ))}

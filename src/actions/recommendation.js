@@ -1,27 +1,50 @@
 import axios from 'axios';
 
 export const ACT_RECOMMENDATION_FETCH_BEGIN = "ACT_RECOMMENDATION_FETCH_BEGIN";
-export const actRecommendationFetchBegin = () => { 
+export const actRecommendationFetchBegin = () => {
     return {
-        type: ACT_RECOMMENDATION_FETCH_BEGIN 
+        type: ACT_RECOMMENDATION_FETCH_BEGIN
     };
 }
 
 export const ACT_RECOMMENDATION_FETCH_SUCCESS = "ACT_RECOMMENDATION_FETCH_SUCCESS";
-export const actRecommendationFetchSuccess = data => { 
+export const actRecommendationFetchSuccess = data => {
     return {
-        type: ACT_RECOMMENDATION_FETCH_SUCCESS, 
+        type: ACT_RECOMMENDATION_FETCH_SUCCESS,
+        data,
+    }
+};
+
+export const ACT_RECOMMENDATION_RATING_FETCH_SUCCESS = "ACT_RECOMMENDATION_RATING_FETCH_SUCCESS";
+export const actRecommendationRatingFetchSuccess = data => {
+    return {
+        type: ACT_RECOMMENDATION_RATING_FETCH_SUCCESS,
         data,
     }
 };
 
 export const ACT_RECOMMENDATION_FETCH_FAIL = "ACT_RECOMMENDATION_FETCH_FAIL";
-export const actRecommendationFetchFail = reason => { 
+export const actRecommendationFetchFail = reason => {
     return {
-        type: ACT_RECOMMENDATION_FETCH_FAIL, 
-        reason 
+        type: ACT_RECOMMENDATION_FETCH_FAIL,
+        reason
     };
 };
+
+export const getRating = appList => {
+    return appList.map(appData => {
+        return actRecommendationRatingFetch(appData.id.attributes['im:id'])
+            .then(rating => {
+                return {
+                    ...appData,
+                    rating
+                }
+            })
+            .catch(err => {
+                throw new err()
+            })
+    })
+}
 
 export const actRecommendationFetch = () => {
     return (dispatch) => {
@@ -29,6 +52,12 @@ export const actRecommendationFetch = () => {
         return axios.get("https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json")
             .then(res => {
                 dispatch(actRecommendationFetchSuccess(res))
+                return res
+            })
+            .then(res => getRating(res.data.feed.entry))
+            .then(resPromiseWithRating => Promise.all(resPromiseWithRating))
+            .then(resWithRating => {
+                dispatch(actRecommendationRatingFetchSuccess(resWithRating))
             })
             .catch(err => {
                 dispatch(
@@ -37,3 +66,17 @@ export const actRecommendationFetch = () => {
             })
     };
 }
+
+const actRecommendationRatingFetch = id => {
+    return axios.get(`https://itunes.apple.com/hk/lookup?id=${id}`, {
+        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        proxy: {
+            host: 'localhost',
+            port: 3000
+        }
+    })
+        .then(res => res.data.results[0].averageUserRating)
+        .catch(err => {
+            throw new err()
+        })
+};
