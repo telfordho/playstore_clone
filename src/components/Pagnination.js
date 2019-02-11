@@ -35,7 +35,7 @@ const Pagnination = props => {
         }
         <IconButton
           onClick={handleNextButtonClick}
-          disabled={page === 10}
+          disabled={page === Math.ceil(list.length/10)}
           aria-label="Next Page"
         >
             <KeyboardArrowRight />
