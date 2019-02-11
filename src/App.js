@@ -34,11 +34,11 @@ class App extends React.Component {
 
   render() {
     const { classes } = this.props;
-    
+
     return (
       <div>
         <Grid style={{ display: 'flex' }} container justify='center'>
-          <SearchBar classes={classes} />
+          <SearchBar classes={classes} handlePageOfSearch={this.handlePageClick}/>
         </Grid>
         <Grid style={{ display: 'flex' }} container justify='center'>
           <Suspense fallback={<div><CircularProgress variant="indeterminate" disableShrink/></div>}>

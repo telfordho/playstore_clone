@@ -9,12 +9,13 @@ import { actRecommendationSearch,actAppListSearch } from '../actions/search'
 import { connect } from "react-redux";
 
 const SearchBar = props => {
-  const { classes, onSearch } = props;
+  const { classes, onSearch, handlePageOfSearch } = props;
 
   return (
     <Paper className={classes.root} elevation={5}>
       <InputBase className={classes.input} placeholder="Search" onChange={e=>{
           onSearch(e.target.value)
+          handlePageOfSearch(1)
         }}
       />
       <IconButton className={classes.iconButton} aria-label="SearchIcon">

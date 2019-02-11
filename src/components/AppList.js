@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 
 class AppList extends React.Component {
 
-  componentDidMount = () => {
+  componentDidMount (){
     this.props.onInit()
   }
 

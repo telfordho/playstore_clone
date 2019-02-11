@@ -4,6 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import searchBarStyles from '../jss/searchBarStyles'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import { connect } from "react-redux";
+
 
 const Pagnination = props => {
 
@@ -11,7 +13,8 @@ const Pagnination = props => {
         handleNextButtonClick,
         handleBackButtonClick,
         handlePageClick,
-        page
+        page,
+        list,
        } = props;
 
   return (
@@ -24,7 +27,7 @@ const Pagnination = props => {
             <KeyboardArrowLeft /> 
         </IconButton>
         {
-            [...Array(10)].map((number,idx)=>(
+            [...Array(Math.ceil(list.length/10))].map((number,idx)=>(
                 <IconButton key={idx.toString()} onClick={()=>handlePageClick(idx + 1)}>
                     {idx + 1}
                 </IconButton>
@@ -41,4 +44,15 @@ const Pagnination = props => {
   );
 }
 
-export default withStyles(searchBarStyles)(Pagnination);
+const mapStateToProps = state => {
+    return {
+        list: state.list.search,
+    }
+}
+
+    const PagninationContainer = connect(
+      mapStateToProps
+    )(withStyles(searchBarStyles)(Pagnination));
+
+    export default PagninationContainer;
+

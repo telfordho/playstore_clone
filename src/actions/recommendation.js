@@ -75,7 +75,7 @@ const actRecommendationRatingFetch = id => {
             port: 3000
         }
     })
-        .then(res => res.data.results[0].averageUserRating)
+        .then(res => res.data.results[0].averageUserRating || res.data.results[0].averageUserRatingForCurrentVersion)
         .catch(err => {
             throw new err()
         })
