@@ -41,7 +41,7 @@ export const getRating = appList => {
                 }
             })
             .catch(err => {
-                throw new err()
+                throw err
             })
     })
 }
@@ -68,15 +68,9 @@ export const actRecommendationFetch = () => {
 }
 
 const actRecommendationRatingFetch = id => {
-    return axios.get(`https://itunes.apple.com/hk/lookup?id=${id}`, {
-        headers: { 'content-type': 'application/x-www-form-urlencoded' },
-        proxy: {
-            host: 'localhost',
-            port: 3000
-        }
-    })
+    return axios.get(`https://cors-anywhere.herokuapp.com/itunes.apple.com/hk/lookup?id=${id}`)
         .then(res => res.data.results[0].averageUserRating || res.data.results[0].averageUserRatingForCurrentVersion)
         .catch(err => {
-            throw new err()
+            throw err
         })
 };
