@@ -17,17 +17,18 @@ export const actAppListSearch = input => {
 export const dataFilter = (data, input) => {
     let arr = []
     if(input !== null){
+        let lowerInput = input.toLowerCase()
         data.forEach(item => {
-            if(item['im:name'].label.toLowerCase().includes(input)){
+            if(item['im:name'].label.toLowerCase().includes(lowerInput)){
                 arr.push(item)
             }
-            else if(item.category.attributes.label.toLowerCase().includes(input)){
+            else if(item.category.attributes.label.toLowerCase().includes(lowerInput)){
                 arr.push(item)
             }
-            else if(item['im:artist'].label.toLowerCase().includes(input)){
+            else if(item['im:artist'].label.toLowerCase().includes(lowerInput)){
                 arr.push(item)
             }
-            else if(item.summary.label.toLowerCase().includes(input)){
+            else if(item.summary.label.toLowerCase().includes(lowerInput)){
                 arr.push(item)
             }
         })  
