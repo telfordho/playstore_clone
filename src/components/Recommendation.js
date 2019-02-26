@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 class Recommendation extends React.Component {
-    componentDidMount = () => {
+    componentDidMount (){
         this.props.onInit()
       }
     render(){
